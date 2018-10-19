@@ -34,7 +34,8 @@ math is brought in. Instead, we will be looking at examples from different
 languages, to see how easy it is to create hash values.
 
 For all these examples, we will be using the bytes `['t', 'e', 's', 't']` and
-as many builtin libraries as possible.
+as many builtin libraries as possible. Each segment will store the value in a
+variable called `hash` as a base16 ("hex") encoded string, and print it.
 
 #### Python
 
@@ -43,6 +44,7 @@ as many builtin libraries as possible.
 # accept bytes-like objects.
 import hashlib
 hash = hashlib.sha256(b"test").hexdigest()
+print(hash)
 ```
 
 #### Lua
@@ -54,13 +56,16 @@ hash = hashlib.sha256(b"test").hexdigest()
 local basexx = require("basexx")
 local digest = require("openssl.digest")
 local hash = basexx.to_hex(digest.new("sha256"):final("test"))
+print(hash)
 ```
 
 #### NodeJS
 
 ```javascript
 let crypto = require("crypto");
-let hash = crypto.createHash('sha256').update('test', 'ascii').digest();
+let hash_buffer = crypto.createHash('sha256').update('test', 'ascii').digest();
+let hash = hash_buffer.toString('hex');
+console.log(hash);
 ```
 
 #### Shell
@@ -70,12 +75,13 @@ command -v gsha256sum >/dev/null && SHA256SUM=gsha256sum || SHA256SUM=sha256sum
 command -v $SHA256SUM >/dev/null || { echo "$SHA256SUM not found"; exit 1 }
 
 hash=$(printf test | $SHA256SUM | awk '{ print $1 }') 
+echo hash
 ```
 
 #### Ruby
 
 ```ruby
 require 'digest'
-
 hash = Digest::SHA256.hexdigest 'test'
+puts hash
 ```
