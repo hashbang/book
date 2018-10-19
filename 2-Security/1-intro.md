@@ -32,9 +32,9 @@ flash drive didn't strip out a security measure?
 
 In other chapters, we explain things in a format listing "the hard way" and
 "the easy way". We will not be doing that in this chapter. Security is a very
-difficult field to get right, and off-putting for many people. Instead, we will
-be using software that should compile on every UNIX-compatible system - and
-maybe even Windows.
+difficult field to get right, and off-putting for many people.
 
 We will list multiple solutions instead, as security is something that should
-extend into all aspects of technology.
+extend into all aspects of technology. Security is a complicated problem to
+solve, however, and sometimes a language might not have a solution to a
+particular problem yet.

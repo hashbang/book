@@ -33,8 +33,8 @@ We will not be looking at algorithms, as people tend to click off when complex
 math is brought in. Instead, we will be looking at examples from different
 languages, to see how easy it is to create hash values.
 
-For all these examples, we will be using the bytes ['t', 'e', 's', 't'] and as
-many builtin libraries as possible.
+For all these examples, we will be using the bytes `['t', 'e', 's', 't']` and
+as many builtin libraries as possible.
 
 #### Python
 
@@ -53,7 +53,7 @@ hash = hashlib.sha256(b"test").hexdigest()
 ```lua
 local basexx = require("basexx")
 local digest = require("openssl.digest")
-local hash = digest.new("sha256"):final("test")
+local hash = basexx.to_hex(digest.new("sha256"):final("test"))
 ```
 
 #### NodeJS
