@@ -107,12 +107,12 @@ def pad_message(message, desired_length):
     # Very important that it's _bytes_ and not _bits_
     # Takes a bytearray or bytes object
     bytes_left = len(message) % desired_len
-    if len(message) % desired_len == 0:
-        # Fill a whole block with the length the size of the block
-	return message + bytes([desired_length] * desired_length)
-    else:
+    if bytes_left:  # Taking advantage of 0 being falsy
         # Fill the rest of the current block with the length remaining
 	return message + bytes([bytes_left] * bytes_left)
+    else:
+        # Fill a whole block with the length the size of the block
+	return message + bytes([desired_length] * desired_length)
 
 def depad_message(message):
     # Check the last byte, remove as many bytes as the numeric of last_byte
