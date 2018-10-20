@@ -9,9 +9,15 @@ called a "hash", and are used for checking data integrity. They are what are
 known as a "trapdoor" function: easy to get into, but hard to break out of.
 
 A hash value is, quite simply, a reproducible value generated based off of a
-certain input. It is very hard to find two hash collisions in something that is
-government-grade, such as the SHA-1, SHA-2, and SHA-3 sets of algorithms. It
-would take many years to find two values that produce the same hash.
+certain input. It is very hard to find two hash collisions in most widely used
+algorithms, such as the SHA-2 and SHA-3 sets of algorithms. It would likely
+take many years to find two values that produce the same hash.
+
+However, hash algorithms are not perfect. For example, SHA-1 has been broken in
+practice, to where two PDF documents can have the same SHA-1 hash. Similarly,
+some issues with MD5 resulted in some people being able to extract information
+about the original data. It is wise to constantly keep up to date on which
+algorithms are the best for your use.
 
 **So, where would you use a hash?** If you have any data that you have to
 ensure has not changed, you should use a hash stored on a trusted medium - this
