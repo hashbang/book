@@ -132,6 +132,11 @@ Encrypting also involves an initialization vector. An initialization vector is
 used as a random value which ensures the output from encrypting will always
 be different as long as the initialization vector is different.
 
+The initialization vector can be openly shared with the recipient of the
+message. Because it is a value unique to this specific message, there is no
+harm if someone finds the value. It is used to ensure that _further_ data is
+not encrypted with the same output, and is in no way tied to your key.
+
 For the purpose of these examples, we will assume that you have made a
 `pad_message(message, desired_length)` and `depad_message(message)` function.
 
