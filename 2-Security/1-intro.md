@@ -1,8 +1,8 @@
 ## Security
 
 Now that you (probably) know some stuff about the internet, it's valuable to
-learn how you can protect yourself from people who want to attack you and your
-services.
+learn the algorithms used to protect yourself from people who want to attack
+you and your services.
 
 A long time ago, people used protocols across local networks to access files.
 Assuming no one could intercept traffic, there was no reason to worry about
