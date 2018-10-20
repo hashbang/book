@@ -40,6 +40,11 @@ will not be looking into the other applications of HMAC in this chapter. The
 only thing you need to care about is that `hmacsha256(x, y)` will _always_
 return the same result.
 
+To clarify:
+
+- `hmacsha256(x, y)` can deterministically produce a pseudorandom value
+- `pbkdf2(hmacsha256, ...)` can produce a key compatible with AES
+
 ### Generating the Key
 
 We will be generating the key using PBKDF2 with the HMAC-SHA256 PRNG with a
