@@ -1,5 +1,10 @@
 ## Security
 
+**Note:** This section of the book is for education purposes only for
+understanding how the underlying systems for security work. It is incredibly
+easy to mess up a custom security implementation. Do not use these solutions
+in a noneducational environment.
+
 Now that you (probably) know some stuff about the internet, it's valuable to
 learn the algorithms used to protect yourself from people who want to attack
 you and your services.

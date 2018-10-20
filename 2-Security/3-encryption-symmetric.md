@@ -1,5 +1,10 @@
 ## Symmetric Encryption
 
+**Note:** This section of the book is for education purposes only for
+understanding how the underlying systems for security work. It is incredibly
+easy to mess up a custom security implementation. Do not use these solutions
+in a noneducational environment.
+
 So far, we have a way of verifying information. This solves the problem of
 making sure that data hasn't changed, but even if people can't/won't manipulate
 the data, perhaps you don't want them listening in. For example, you might be
