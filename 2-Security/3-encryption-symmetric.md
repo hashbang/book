@@ -31,8 +31,14 @@ would be a password.
 However, just sha256 is considered insecure in this case - passwords are short
 and often easily guessable.  We will instead be using an algorithm designed
 specifically for this purpose: PBKDF2, or "Password Based Key Derivation
-Function 2". It uses a pseudorandom number generator, which is where the
-SHA256 function - when combined with HMAC-SHA256 - comes in.
+Function 2". It uses a pseudorandom number generator, which is where another
+algorithm comes in, HMAC-SHA256.
+
+The significant thing about HMAC-SHA256 is that it can take in two values and
+output one value. That is what is required for the PBKDF2 implementation. We
+will not be looking into the other applications of HMAC in this chapter. The
+only thing you need to care about is that `hmacsha256(x, y)` will _always_
+return the same result.
 
 ### Generating the Key
 
