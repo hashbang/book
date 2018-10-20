@@ -151,7 +151,10 @@ import os
 AES.key_size = 32
 AES.block_size = 32
 
-iv = os.urandom(16)  # This is important, must be kept per-interaction
+# This is your initialization vector. You can share this with the recipient
+# over plaintext as it does not contain any secure information.
+iv = os.urandom(AES.block_size)
+
 encrypt_aes = AES.new(key, AES.MODE_CBC, iv)
 decrypt_aes = AES.new(key, AES.MODE_CBC, iv)
 message = pad_message(b'Hello World!', AES.block_size)
