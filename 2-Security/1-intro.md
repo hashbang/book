@@ -38,3 +38,8 @@ We will list multiple solutions instead, as security is something that should
 extend into all aspects of technology. Security is a complicated problem to
 solve, however, and sometimes a language might not have a solution to a
 particular problem yet.
+
+At the end of this chapter, we will be putting these skills to the ultimate
+test: building a package manager. It will need to be secure in all aspects, to
+where nothing short of forcing the author can cause a bad package to be
+published.
