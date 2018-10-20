@@ -98,9 +98,8 @@ so instead we need pad the message to be an exact multiple of that size. To
 solve this, we'll use the PKCS#7 algorithm, which pads the message with bytes
 containing the size of how many 
 
-We'll do a Python implementation; it's left to the reader to design the
-algorithm for other languages. `chr` converts a number to it's byte equivalent
-and `ord` converts a byte in a string to it's numeric equivalent.
+We'll do a Python implementation; it's left to the reader to program the
+algorithm for other languages.
 
 ```py
 def pad_message(message, desired_length):
