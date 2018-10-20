@@ -18,23 +18,20 @@ much more powerful and secure than DES and it's "triple-DES" (3DES) variant, so
 we will be using AES.
 
 AES also can use a 256 bit key. If you recall from chapter 2, "Hashing", one
-of the algorithms used _produces_ a 256 bit digest! This means that we could
+of the algorithms used _produces_ a 256 bit digest! This means that we _could_
 use the output of sha256 as an AES key. You might also remember that we could
 hash arbitrary text, and one of the possible values you might want to hash,
-would be a password. This is how password-based encryption usually works.
+would be a password.
 
 However, just sha256 is considered insecure in this case - passwords are short
 and often easily guessable.  We will instead be using an algorithm designed
 specifically for this purpose: PBKDF2, or "Password Based Key Derivation
-Function 2". It uses a pseudorandom number generator.
-
-The PBKDF2 algorithm requires another algorithm to run. For this purpose, we
-will be using the HMAC-SHA256 algorithm. It is still too insecure to use by
-itself, but we can use it as a part of PBKDF2.
+Function 2". It uses a pseudorandom number generator, which is where the
+SHA256 function - when combined with HMAC-SHA256 - comes in.
 
 ### Generating the Key
 
-We will be generating the key using PBKDF2 with the HMAC-SHA256 PNG with a
+We will be generating the key using PBKDF2 with the HMAC-SHA256 PRNG with a
 password containing the ASCII encoded bytes `"your_password"`, a salt
 containing the ASCII encoded bytes `"your_salt"`, and 1000000 (one million)
 iterations. The key will be 32 bytes - 256 bits - in length.
@@ -96,7 +93,7 @@ So far, we have a 256 bit key. This is good if we want to encrypt a block of
 text that is exactly 256 bits. However, we might not have that perfect size,
 so instead we need pad the message to be an exact multiple of that size. To
 solve this, we'll use the PKCS#7 algorithm, which pads the message with bytes
-containing the size of how many 
+whose value are equal to how many bytes are required to fill a block.
 
 We'll do a Python implementation; it's left to the reader to program the
 algorithm for other languages.
@@ -141,10 +138,12 @@ For the purpose of these examples, we will assume that you have made a
 # Assuming `key` from earlier...
 from Crypto.Cipher import AES
 import os
+AES.key_size = 32
+AES.block_size = 32
 
 iv = os.urandom(16)  # This is important, must be kept per-interaction
 encrypt_aes = AES.new(key, AES.MODE_CBC, iv)
 decrypt_aes = AES.new(key, AES.MODE_CBC, iv)
-message = pad_message(b'Hello World!')
+message = pad_message(b'Hello World!', AES.block_size)
 print(depad_message(decrypt_aes.decrypt(encrypt_aes.encrypt(message))))
 ```
