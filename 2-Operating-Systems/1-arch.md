@@ -9,8 +9,9 @@ Arch Linux. Power users with different opinions should refer to the official
 [1]:https://wiki.archlinux.org/index.php/Installation_guide
 
 ## Requirements
- * A Linux computer to run early steps
-   * Can use an [Ubuntu live CD][1] if a Linux computer is not available
+ * These steps are best done on a Linux or OSX computer to run early steps.
+   * Windows users may use WSL (Windows Subsystem for Linux)
+   * Or can use an [Ubuntu live CD][1]
  * A blank flash drive, 1GB+
  * Target computer
     * Known to be compatible with Linux
@@ -40,11 +41,11 @@ Arch Linux. Power users with different opinions should refer to the official
 [1]: https://mirrors.kernel.org/archlinux/iso/latest/
 
 2. Write latest ISO to flash drive
-  1. List current storage devices with ```lsblk```
+  1. List current storage devices with `lsblk`
   2. Insert flash drive
-  3. List current storage devices with ```lsblk``` again
+  3. List current storage devices with `lsblk` again
   4. Take note of new drive. Example: /dev/sdX
-  5. Use ```dd``` to write ISO image to drive
+  5. Use `dd` to write ISO image to drive
 
     ```
     sudo dd \
@@ -87,8 +88,8 @@ Arch Linux. Power users with different opinions should refer to the official
     ```
 
 5. Connect to the internet
-  1. Select and join a wireless network with ```wifi-menu```
-  2. Verify connection with ```ping 1.1.1.1```
+  1. Select and join a wireless network with `wifi-menu`
+  2. Verify connection with `ping 1.1.1.1`
 
 6. Update system clock
 
@@ -97,7 +98,7 @@ Arch Linux. Power users with different opinions should refer to the official
    ```
 
 7. Set up encrypted disk
-  1. Determine target root device with ```lsblk```. Example: /dev/mmcblk0
+  1. Determine target root device with `lsblk`. Example: /dev/mmcblk0
   2. Create all partitions
 
     TL:DR;
@@ -117,6 +118,9 @@ Arch Linux. Power users with different opinions should refer to the official
        -c 2:root       `# set comment/label to "root"` \
        /dev/mmcblk0     # writing to your target drive
      ```
+
+    Note: As an alternative, you can graphically partition using `cgdisk`
+
   3. Format the EFI boot partition as FAT32
 
      ```
@@ -177,7 +181,7 @@ Arch Linux. Power users with different opinions should refer to the official
   3. Set time zone
 
   ```
-  ln -sf /usr/share/zoneinfo/Region/City /etc/localtime
+  timedatectl set-timezone Region/City
   hwclock --systohc
   ```
 
@@ -198,7 +202,7 @@ Arch Linux. Power users with different opinions should refer to the official
 
   ```
   # Create the hostname file
-  echo "computername" > /etc/hostname
+  hostnamectl set-hostname computername
 
   # Specify new hostname for the network
   echo "127.0.0.1 computername.localdomain computername localhost" > /etc/hosts
