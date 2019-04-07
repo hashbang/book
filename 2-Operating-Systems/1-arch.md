@@ -151,12 +151,10 @@ Arch Linux. Power users with different opinions should refer to the official
 9. Select the Mirrors
 
   ```
-  pacman -Sy pacman-contrib
-  curl https://www.archlinux.org/mirrorlist/all/https/ \
-  | sed 's/^#Server/Server/g' \
-  | rankmirrors -n 0 - \
-  > /etc/pacman.d/mirrorlist
+  pacman -Sy reflector
+  reflector --age 12 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
   ```
+
   Note: This avoids manual mirror sorting. Native script does not yet exist.
 
 10. Install the base packages
@@ -219,7 +217,39 @@ Arch Linux. Power users with different opinions should refer to the official
   mkinitcpio -p linux
   ```
 
-  7. Create a user with super user rights
+  7. Install packages
+
+  TL;DR:
+  ```
+  pacman -S sudo dialog wpa_supplicant iw vim git pcscd libu2f-host pcsclite \
+    chromium arandr compton i3 rofi kitty nitrogen xorg xf86-video-intel
+  ```
+
+  Explanation:
+  ```
+  pacman -S \
+    sudo             `# "super user do": allows user to run commands as root` \
+    dialog           `# terminal menu system, needed for "wifi-menu"` \
+    wpa_supplicant   `# tools for managing encrypted wireless networks` \
+    iw               `# wireless management CLI utility` \
+    vim              `# alternative text editor to "nano"` \
+    git              `# used to download and track source code` \
+    pcsclite         `# daemon for managing smartcard access` \
+    libu2f-host      `# allow U2F/2FA smartcard for some applications` \
+    chromium         `# open source edition of Chrome` \
+    arandr           `# graphical screen/resolution management` \
+    compton          `# hardware accelerated desktop layer` \
+    i3               `# tiling window manager` \
+    rofi             `# graphical command runner menu` \
+    kitty            `# graphical terminal emulator` \
+    nitrogen         `# wallpaper manager` \
+    xorg             `# graphical user interface infrastructure` \
+    xf86-video-intel `# graphics driver for Intel chipsets`
+  ```
+
+  Note: Non-Intel graphics users, see: [Arch Driver Installation][2]
+
+  8. Create a user with super user rights
 
   ```
   pacman -S sudo
@@ -228,7 +258,7 @@ Arch Linux. Power users with different opinions should refer to the official
   passwd janedoe
   ```
 
-  8. Configure and install bootloader
+  9. Configure and install bootloader
 
   ```
   bootctl --path=/boot install
@@ -236,13 +266,9 @@ Arch Linux. Power users with different opinions should refer to the official
   echo "title Arch Linux" >> /boot/loader/entries/arch.conf
   echo "linux /vmlinuz-linux" >> /boot/loader/entries/arch.conf
   echo "initrd /initramfs-linux.img" >> /boot/loader/entries/arch.conf
-  echo "options cryptdevice=UUID=$(blkid -o value /dev/mmcblk0p2 | head -n1):cryptroot root=/dev/mapper/cryptroot rw" >> /boot/loader/entries/arch.conf
-  ```
-
-  9. Install critical packages
-
-  ```
-  pacman -S dialog wpa_supplicant iw
+  echo "options cryptdevice=UUID=$(blkid -o value /dev/mmcblk0p2 \
+    | head -n1):cryptroot root=/dev/mapper/cryptroot rw" >> \
+    /boot/loader/entries/arch.conf
   ```
 
   10. Boot into Arch
@@ -273,3 +299,4 @@ If you need to resume from a broken or partial install, perform steps 3-5 then:
 
 [1]: https://wiki.archlinux.org/index.php/Dm-crypt/Encrypting_an_entire_system#LUKS_on_a_partition
 
+[2]: https://wiki.archlinux.org/index.php/xorg#Driver_installation
