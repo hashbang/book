@@ -157,11 +157,45 @@ Arch Linux. Power users with different opinions should refer to the official
 
   Note: This avoids manual mirror sorting. Native script does not yet exist.
 
-10. Install the base packages
+10. Install packages
+    1. Base packages
 
-  ```
-  pacstrap /mnt base
-  ```
+    ```
+    pacstrap /mnt base
+    ```
+    2. Secondary, but useful and necessary packages
+
+    TL;DR:
+    ```
+    pacman -S sudo dialog wpa_supplicant iw vim git pcscd libu2f-host pcsclite \
+      chromium arandr compton i3 dmenu kitty nitrogen slock xorg xf86-video-intel
+    ```
+
+    Explanation:
+    ```
+    pacman -S \
+      sudo             `# "super user do": allows user to run commands as root` \
+      dialog           `# terminal menu system, needed for "wifi-menu"` \
+      wpa_supplicant   `# tools for managing encrypted wireless networks` \
+      iw               `# wireless management CLI utility` \
+      vim              `# alternative text editor to "nano"` \
+      git              `# used to download and track source code` \
+      pcsclite         `# daemon for managing smartcard access` \
+      libu2f-host      `# allow U2F/2FA smartcard for some applications` \
+      chromium         `# open source edition of Chrome` \
+      arandr           `# graphical screen/resolution management` \
+      compton          `# hardware accelerated desktop layer` \
+      i3-wm            `# tiling window manager` \
+      dmenu            `# graphical command runner menu` \
+      kitty            `# graphical terminal emulator` \
+      nitrogen         `# wallpaper manager` \
+      slock            `# simple lock screen` \
+      xorg             `# graphical user interface infrastructure` \
+      xf86-video-intel `# graphics driver for Intel chipsets`
+    ```
+
+    Note: Non-Intel graphics users, see: [Arch Driver Installation][2]
+
 
 11. Configure the System
   1. Fstab: Generate 'File System TABle' of contents
@@ -175,39 +209,7 @@ Arch Linux. Power users with different opinions should refer to the official
   ```
   arch-chroot /mnt
   ```
-
-  3. Set time zone
-
-  ```
-  timedatectl set-timezone Region/City
-  hwclock --systohc
-  ```
-
-  4. Localization: setting your preferred language
-
-  ```
-  # Uncomment preferred language in /etc/locale.gen
-  sed -i 's/^#en_US/en_US/g' /etc/locale.gen
-
-  # Create /etc/locale.conf and set default language
-  echo "LANG=en_US.UTF-8" > /etc/locale.conf
-
-  # Non-US keyboard users can set their default layout
-  echo "KEYMAP=de-latin1" > /etc/vconsole.conf
-  ```
-
-  5. Name your computer!
-
-  ```
-  # Create the hostname file
-  hostnamectl set-hostname computername
-
-  # Specify new hostname for the network
-  echo "127.0.0.1 computername.localdomain computername localhost" > /etc/hosts
-  echo "::1 computername.localdomain computername localhost" >> /etc/hosts
-  ```
-
-  6. Initramfs: install system initialization bundle
+  3. Initramfs: install system initialization bundle
 
   ```
   # Enable encryption support in initramfs
@@ -217,48 +219,7 @@ Arch Linux. Power users with different opinions should refer to the official
   mkinitcpio -p linux
   ```
 
-  7. Install packages
-
-  TL;DR:
-  ```
-  pacman -S sudo dialog wpa_supplicant iw vim git pcscd libu2f-host pcsclite \
-    chromium arandr compton i3 rofi kitty nitrogen xorg xf86-video-intel
-  ```
-
-  Explanation:
-  ```
-  pacman -S \
-    sudo             `# "super user do": allows user to run commands as root` \
-    dialog           `# terminal menu system, needed for "wifi-menu"` \
-    wpa_supplicant   `# tools for managing encrypted wireless networks` \
-    iw               `# wireless management CLI utility` \
-    vim              `# alternative text editor to "nano"` \
-    git              `# used to download and track source code` \
-    pcsclite         `# daemon for managing smartcard access` \
-    libu2f-host      `# allow U2F/2FA smartcard for some applications` \
-    chromium         `# open source edition of Chrome` \
-    arandr           `# graphical screen/resolution management` \
-    compton          `# hardware accelerated desktop layer` \
-    i3               `# tiling window manager` \
-    rofi             `# graphical command runner menu` \
-    kitty            `# graphical terminal emulator` \
-    nitrogen         `# wallpaper manager` \
-    xorg             `# graphical user interface infrastructure` \
-    xf86-video-intel `# graphics driver for Intel chipsets`
-  ```
-
-  Note: Non-Intel graphics users, see: [Arch Driver Installation][2]
-
-  8. Create a user with super user rights
-
-  ```
-  pacman -S sudo
-  echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
-  useradd -m -G wheel -s /bin/bash janedoe
-  passwd janedoe
-  ```
-
-  9. Configure and install bootloader
+  4. Configure and install bootloader
 
   ```
   bootctl --path=/boot install
@@ -271,7 +232,120 @@ Arch Linux. Power users with different opinions should refer to the official
     /boot/loader/entries/arch.conf
   ```
 
-  10. Boot into Arch
+  5. Configure system time keeping
+
+  ```
+  timedatectl set-ntp true
+  timedatectl set-timezone Region/City
+  hwclock --systohc
+  ```
+
+  6. Localization: setting your preferred language
+
+  ```
+  # Uncomment preferred language in /etc/locale.gen
+  sed -i 's/^#en_US/en_US/g' /etc/locale.gen
+
+  # Create /etc/locale.conf and set default language
+  echo "LANG=en_US.UTF-8" > /etc/locale.conf
+
+  # Non-US keyboard users can set their default layout
+  echo "KEYMAP=de-latin1" > /etc/vconsole.conf
+
+  # Re-generate locales
+  locale-gen
+  ```
+
+  7. Persist rotation and font as desired
+
+    1. Rotation
+
+    ```
+    sed -i '$s/$/ fbcon=rotate:1/' /boot/loader/entries/arch.conf
+    ```
+
+    2. Font
+
+    ```
+    echo "FONT=latarcyrheb-sun32" >> /etc/vconsole.conf
+    ```
+
+  8. Name your computer!
+
+  ```
+  # Create the hostname file
+  hostnamectl set-hostname computername
+
+  # Specify new hostname for the network
+  echo "127.0.0.1 computername.localdomain computername localhost" > /etc/hosts
+  echo "::1 computername.localdomain computername localhost" >> /etc/hosts
+  ```
+
+  9. Create a user with super user rights
+
+  ```
+  echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
+  useradd -m -G wheel -s /bin/bash janedoe
+  passwd janedoe
+  ```
+
+  10. Configure graphical environment
+
+  TL;DR:
+  ```
+  echo "gpg-connect-agent updatestartuptty /bye \n i3" > .xinitrc
+  sed -i "s/i3-sensible-terminal/kitty/g" .config/i3/config
+  mkdir -p /etc/systemd/system/getty@tty1.service.d
+  echo -e "[Service]\nExecStart=\nExecStart=-/usr/bin/agetty -a janedoe -J %I $TERM" \
+    > /etc/systemd/system/getty@tty1.service.d/override.conf
+  echo '[[ -z $DISPLAY && ! -e /tmp/.X11-unix/X0 ]] && (( EUID )) && exec startx' \
+    > /home/janedoe/.bash_profile
+  chown janedoe:janedoe /home/janedoe/.bash_profile
+  ```
+
+  Explanation:
+  ```
+  cat <<-EOF > .xinitrc
+    #!/bin/bash
+
+    # Let GPG know about our current terminal
+    gpg-connect-agent updatestartuptty /bye
+
+    # Optional: Start compositor for faster rendering for terminals etc
+    # compton &
+
+    # Optional: Set wallpaper
+    # nitrogen --set-scaled ~/.wallpaper/yourcoolwallpaper.jpg
+
+    # Optional: Start terminal
+    # kitty &
+
+    # Optional: Set resolution and rotation
+    # xrandr --output HDMI1 --off --output DP1 --off --output eDP1 --mode 1200x1920 --pos 0x0 --rotate right --output VIRTUAL1 --off
+    # xinput set-prop 15 --type=float "Coordinate Transformation Matrix" 0 1 0 -1 0 1 0 0 1
+
+    # Start Window manager
+    i3
+  EOF
+
+  # Set default terminal
+  sed -i "s/i3-sensible-terminal/kitty/g" .config/i3/config
+
+  # Automatically login janedoe user on boot
+  mkdir -p /etc/systemd/system/getty@tty1.service.d
+  cat <<-EOF > /etc/systemd/system/getty@tty1.service.d/override.conf
+    [Service]
+    ExecStart=
+    ExecStart=-/usr/bin/agetty --autologin janedoe --noclear %I $TERM
+  EOF
+
+  # Automatically start graphical environment if not already running
+  echo '[[ -z $DISPLAY && ! -e /tmp/.X11-unix/X0 ]] && (( EUID )) && exec startx' \
+    > /home/janedoe/.bash_profile
+  chown janedoe:janedoe /home/janedoe/.bash_profile
+  ```
+
+  11. Boot into Arch
     1. Shutdown with
 
       ```
