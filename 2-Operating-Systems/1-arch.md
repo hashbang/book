@@ -168,7 +168,8 @@ Arch Linux. Power users with different opinions should refer to the official
     TL;DR:
     ```
     pacman -S sudo dialog wpa_supplicant iw vim git pcscd libu2f-host pcsclite \
-      chromium arandr compton i3 dmenu kitty nitrogen slock xorg xf86-video-intel
+      chromium arandr compton i3 dmenu kitty nitrogen slock xorg \
+      xf86-video-intel ccid opensc openssh
     ```
 
     Explanation:
@@ -192,6 +193,9 @@ Arch Linux. Power users with different opinions should refer to the official
       slock            `# simple lock screen` \
       xorg             `# graphical user interface infrastructure` \
       xf86-video-intel `# graphics driver for Intel chipsets`
+      ccid             `# CCID driver for some smartcards, i.e. Yubikey`
+      opensc           `# OpenSC driver for some smartcards, i.e. Yubikey`
+      openssh          `# Secure shell into other computers`
     ```
 
     Note: Non-Intel graphics users, see: [Arch Driver Installation][2]
@@ -328,8 +332,19 @@ Arch Linux. Power users with different opinions should refer to the official
     i3
   EOF
 
+  # Set Window Manager font size
+  sed -i "s/monospace .*/Terminus 15/g" .config/i3/config
+
   # Set default terminal
   sed -i "s/i3-sensible-terminal/kitty/g" .config/i3/config
+
+  # Configure terminal and font
+  # mkdir -p .config/kitty
+  # echo "font_family Terminus" >> .config/kitty/kitty.conf
+  # echo "font_size 15.0" >> .config/kitty/kitty.conf
+
+  # Scale browser for high resolution displays
+  # echo "--force-device-scale-factor=1.5" >> .config/chromium-flags.conf
 
   # Automatically login janedoe user on boot
   mkdir -p /etc/systemd/system/getty@tty1.service.d
@@ -343,9 +358,19 @@ Arch Linux. Power users with different opinions should refer to the official
   echo '[[ -z $DISPLAY && ! -e /tmp/.X11-unix/X0 ]] && (( EUID )) && exec startx' \
     > /home/janedoe/.bash_profile
   chown janedoe:janedoe /home/janedoe/.bash_profile
-  ```
 
-  11. Boot into Arch
+  # Start wifi on boot
+  # Get name of wireless device
+  ip addr # look for something that starts with wl such as "wlp1s0"
+  systemctl enable netctl-auto@wlp1s05
+  ```
+  11. Configure Smartcard for GnuPG, SSH, etc
+
+  ```
+  systemctl enable pcscd
+  echo "export SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh" >> ~/.bashrc
+  ```
+  12. Boot into Arch
     1. Shutdown with
 
       ```
