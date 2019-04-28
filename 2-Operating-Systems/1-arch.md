@@ -19,6 +19,7 @@ Arch Linux. Power users with different opinions should refer to the official
   * Supports UEFI boot
   * Has wireless card
   * Does not require proprietary "out of tree" drivers
+* Time: 1-3 hours, depending on optional steps
 
 [1]: https://www.ubuntu.com/download/desktop
 
@@ -39,7 +40,7 @@ Devices this guide is known to work with:
 
 1. Download latest Arch Linux ISO image file
    1. Install torrent client such as aria2
-   2. Get latest .iso.torrent URL from [Arch Linux releases][1]
+   2. Copy latest .iso.torrent URL address from [Arch Linux releases][1]
    3. Download ISO with aria2.
       
       Example:
@@ -182,9 +183,7 @@ Devices this guide is known to work with:
     
     ```
     pacstrap /mnt base sudo dialog wpa_supplicant iw vim git \ 
-      pcsclite libu2f-host chromium arandr compton i3-wm dmenu \
-      kitty nitrogen slock xorg xf86-video-intel ccid opensc \
-      openssh haveged pulseaudio pulseaudio-alsa pulsemixer
+      pcsclite libu2f-host chromium arandr compton i3-wm i3status \   dmenu kitty nitrogen slock xorg xorg-xinit xf86-video-intel \   ccid opensc openssh haveged pulseaudio pulseaudio-alsa \    pulsemixer
     ```
     
     Explanation:
@@ -203,11 +202,13 @@ Devices this guide is known to work with:
      arandr           `# graphical screen/resolution management` \
      compton          `# hardware accelerated desktop layer` \
      i3-wm            `# tiling window manager` \
+     i3status         `# status bar for i3` \
      dmenu            `# graphical command runner menu` \
      kitty            `# graphical terminal emulator` \
      nitrogen         `# wallpaper manager` \
      slock            `# simple lock screen` \
      xorg             `# graphical user interface infrastructure` \
+     xorg-xinit       `# allow starting X from command line` \
      xf86-video-intel `# graphics driver for Intel chipsets` \
      ccid             `# CCID driver for some smartcards` \
      opensc           `# OpenSC driver for some smartcards` \
@@ -315,41 +316,60 @@ Devices this guide is known to work with:
     TL;DR:
     
     ```
-    echo "gpg-connect-agent updatestartuptty /bye \n i3" > .xinitrc
-    sed -i "s/i3-sensible-terminal/kitty/g" .config/i3/config
     mkdir -p /etc/systemd/system/getty@tty1.service.d
     echo -e "[Service]\nExecStart=\nExecStart=-/usr/bin/agetty -a janedoe -J %I $TERM" \
     > /etc/systemd/system/getty@tty1.service.d/override.conf
+    su - janedoe
+    echo -e "gpg-connect-agent updatestartuptty /bye\ni3" > .xinitrc
+    mkdir -p .config/i3
+    cp /etc/i3/config .config/i3/config
+    sed -i "s/i3-sensible-terminal/kitty/g" .config/i3/config
     echo '[[ -z $DISPLAY && ! -e /tmp/.X11-unix/X0 ]] && (( EUID )) && exec startx' \
-    > /home/janedoe/.bash_profile
-    chown janedoe:janedoe /home/janedoe/.bash_profile
+    > .bash_profile
+    exit
     ```
     
     Explanation:
     
     ```
-    cat <<-EOF > .xinitrc
-    #!/bin/bash
-    
-    # Let GPG know about our current terminal
-    gpg-connect-agent updatestartuptty /bye
-    
-    # Optional: Start compositor for faster rendering for terminals etc
-    # compton &
-    
-    # Optional: Set wallpaper
-    # nitrogen --set-scaled ~/.wallpaper/yourcoolwallpaper.jpg
-    
-    # Optional: Start terminal
-    # kitty &
-    
-    # Optional: Set resolution and rotation
-    # xrandr --output HDMI1 --off --output DP1 --off --output eDP1 --mode 1200x1920 --pos 0x0 --rotate right --output VIRTUAL1 --off
-    # xinput set-prop 15 --type=float "Coordinate Transformation Matrix" 0 1 0 -1 0 1 0 0 1
-    
-    # Start Window manager
-    i3
+    # Automatically login janedoe user on boot
+    mkdir -p /etc/systemd/system/getty@tty1.service.d
+    cat <<-EOF >     /etc/systemd/system/getty@tty1.service.d/override.conf
+        [Service]
+        ExecStart=
+        ExecStart=-/usr/bin/agetty --autologin janedoe --noclear %I     $TERM
     EOF
+    
+    # Become your janedoe user
+    su - janedoe
+    
+    cat <<-EOF > .xinitrc
+    
+        #!/bin/bash
+    
+        # Let GPG know about our current terminal
+        gpg-connect-agent updatestartuptty /bye
+    
+        # Optional: Compositor for faster terminal rendering   
+        # compton &
+    
+        # Optional: Set wallpaper
+        # nitrogen --set-scaled ~/.wallpaper/yourcoolwallpaper.jpg
+    
+        # Optional: Start terminal
+        # kitty &
+    
+        # Optional: Set resolution and rotation
+        # xrandr --output HDMI1 --off --output DP1 --off --output eDP1 --mode 1200x1920 --pos 0x0 --rotate right --output VIRTUAL1 --off
+        # xinput set-prop 15 --type=float "Coordinate Transformation Matrix" 0 1 0 -1 0 1 0 0 1
+    
+        # Start Window manager
+        i3
+    EOF
+    
+    # Install default i3 config file
+    mkdir -p .config/i3
+    cp /etc/i3/config .config/i3/config
     
     # Optional: Set Window Manager font size
     # sed -i "s/monospace .*/Terminus 15/g" .config/i3/config
@@ -358,16 +378,17 @@ Devices this guide is known to work with:
     sed -i "s/i3-sensible-terminal/kitty/g" .config/i3/config
     
     # Configure media keys
-    cat <<-EOF > .config/i3/config
-    bindsym XF86MonBrightnessUp exec xbacklight -inc 10
-    bindsym XF86MonBrightnessDown exec xbacklight -dec 10
-    bindsym XF86AudioRaiseVolume exec --no-startup-id pactl -- \
-      set-sink-volume 0 +5%
-    bindsym XF86AudioLowerVolume exec --no-startup-id pactl -- \
-      set-sink-volume 0 -5%
-    bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute \
-      0 toggle  
+    cat <<-EOF >> .config/i3/config
+        bindsym XF86MonBrightnessUp exec xbacklight -inc 10
+        bindsym XF86MonBrightnessDown exec xbacklight -dec 10
+        bindsym XF86AudioRaiseVolume exec --no-startup-id pactl -- set-sink-volume 0 +5%
+        bindsym XF86AudioLowerVolume exec --no-startup-id pactl -- set-sink-volume 0 -5%
+        bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle  
     EOF
+    
+    # Optional: Change default $mod key
+    # Mod4 = Windows/Mac/Meta key
+    # sed -i 's/Mod1/Mod4/g' .config/i3/config
     
     # Optional: Configure terminal and font
     # mkdir -p .config/kitty
@@ -377,18 +398,11 @@ Devices this guide is known to work with:
     # Optional: Scale browser for high resolution displays
     # echo "--force-device-scale-factor=1.5" >> .config/chromium-flags.conf
     
-    # Automatically login janedoe user on boot
-    mkdir -p /etc/systemd/system/getty@tty1.service.d
-    cat <<-EOF > /etc/systemd/system/getty@tty1.service.d/override.conf
-    [Service]
-    ExecStart=
-    ExecStart=-/usr/bin/agetty --autologin janedoe --noclear %I $TERM
-    EOF
-    
     # Automatically start GUI environment if not already running
     echo '[[ -z $DISPLAY && ! -e /tmp/.X11-unix/X0 ]] && (( EUID )) && exec startx' \
-    > /home/janedoe/.bash_profile
-    chown janedoe:janedoe /home/janedoe/.bash_profile
+    > .bash_profile
+    
+    exit
     ```
 
 24. Start wifi on boot
@@ -406,7 +420,13 @@ Devices this guide is known to work with:
     echo "export SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh" >> ~/.bashrc
     ```
 
-26. Boot into Arch
+26. Disable Root Login
+    
+    ```
+    passwd -l root
+    ```
+
+27. Boot into Arch
     
     1. Shutdown
        
