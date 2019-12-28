@@ -11,7 +11,7 @@ A FOSS hacker's guide to CLI, privacy, security, self-hosting, and the Internet
 #### [Security/GnuPG](./Security/GnuPG.md)
 #### [Security/Linux_Hardening](./Security/Linux_Hardening.md)
 #### [Security/Password_Mangement](./Security/Password_Mangement.md)
-#### [Security/Personal_HSMs](./Security/Personal_HSMs.md)
+#### [Security/Personal_HSMs](./Security/personal-hsms/README.md.md)
 #### [Security/Release_Signing](./Security/Release_Signing.md)
 #### [Security/SSH](./Security/SSH.md)
 #### [Security/System_Login](./Security/System_Login.md)
