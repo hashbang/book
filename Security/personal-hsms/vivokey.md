@@ -1,6 +1,6 @@
 # VivoKey
 
-![VivoKey](assets/img/vivokey.png)
+<img src="/assets/img/vivokey.jpg" width="320px" />
 [http://vivokey.com/]
 
 The VivoKey is an NFC-only device designed to cover the bulk of use cases of
