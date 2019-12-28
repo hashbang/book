@@ -15,7 +15,7 @@ interfaces such as Github ssh push.
 
 With this interface it is possible to generate an ssh private key in a
 particular format that can be stored inside a PKCS11 capable device such
-as a Yubikey 4.
+as a Yubikey 5.
 
 While this does not offer nearly as many assurances as the GPG setup detailed
 below, it is the simplest to setup.
@@ -54,7 +54,19 @@ This assumes you already have a Security Token configured with a GPG Authenticat
 
 The end result will be that you distribute the SSH Public Key from your Security Token to all VCS systems and servers you normally connect to via SSH. From there you will need to have your key insert it, and tap it once for every connection. You will also be required to tap the key for all SSH Agent forwarding hops removing many of the security issues with traditional ssh agent forwarding on shared systems.
 
-#### Configure gpg-agent to also behave as an ssh-agent:
+#### Most Linux Distros
+
+If you are using a recent systemd based distribution then all the heavy lifting
+is likely already done for you.
+
+We recommend simply adding the following to "/home/$USER/.pam_environment":
+
+```
+SSH_AGENT_PID DEFAULT=
+SSH_AUTH_SOCK DEFAULT="${XDG_RUNTIME_DIR}/gnupg/S.gpg-agent.ssh"
+```
+
+#### Mac OS, WSL, Non-Systemd Linux Distros
 
 ```
 echo >~/.gnupg/gpg-agent.conf <<HERE
