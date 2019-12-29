@@ -126,24 +126,22 @@ C:\> pip install --user yubioath-desktop
 ##### Arch
 
 ```
-pacman -S gpg yubikey-personalization pcsc-tools pcsclite libusb-compat \
- libu2f-host swig gcc python2-pyside python2-click yubioauth-desktop
+pacman -S gpg yubikey-personalization libu2f-host yubikey-manager \
+yubikey-full-disk-encryption yubikey-touch-detector yubioath-desktop
 ```
 
 ##### Debian
 
 ```
-$ sudo apt-get install yubikey-personalization yubikey-personalization-gui gpgv2 \
-  pinentry-gtk2 swig pyside python-pip
+$ sudo apt-get install yubikey-personalization gpgv2 pinentry yubikey-luks \
+yubikey-manager libu2f-udev u2f-host
 ```
 
 ##### Ubuntu
 
 ```
-$ sudo add-apt-repository ppa:yubico/stable
-$ sudo apt-get update
-$ sudo apt-get install yubikey-personalization yubikey-personalization-gui gpgv2 \
-  pinentry-gtk2 swig python-pyside python-pip yubioath-desktop
+$ sudo apt-get install yubikey-personalization gpgv2 pinentry \
+yubioath-desktop yubikey-manager yubikey-luks libu2f-udev u2f-host
 ```
 
 ### Set PIN
