@@ -1,4 +1,10 @@
-## Internet
+---
+title: Internet
+type: docs
+weight: 1
+---
+
+# Internet
 
 So the internet is kind of a big deal. But how do email clients, web browsers,
 and chat programs actually work?

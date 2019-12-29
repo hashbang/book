@@ -1,4 +1,9 @@
-## Personal HSMs
+---
+weight: 1
+title: Personal HSMs
+---
+
+# Personal HSMs
 
 Personal HSMs (Hardware Security Modules) are small hardware devices one uses
 to isolate secrets like private key material and prove physical access to a
