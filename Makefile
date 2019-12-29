@@ -9,7 +9,7 @@ dev-server:
 	docker run \
 		-v $$PWD/:/src/site \
 		-p 1313:1313 \
-		book-builder -- cd /src/site && hugo server --minify --theme book
+		book-builder
 
 .PHONY: image
 image:

@@ -1,0 +1,22 @@
+kind: pipeline
+type: docker
+name: build
+
+clone:
+  disable: true
+
+steps:
+  - name: clone
+    image: plugins/git
+    settings:
+      recursive: true
+      tags: true
+  - name: build
+    image: plugins/docker
+    depends_on: [ clone ]
+    settings:
+      repo: hashbang/book
+      username: hashbangbot
+      password:
+        from_secret: dockerhub_password
+      purge: true

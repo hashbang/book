@@ -1,6 +1,7 @@
 baseURL: https://book.hashbang.sh/
 title: "#! Book"
 languageCode: en-us
+theme: book
 
 markup:
   goldmark:
