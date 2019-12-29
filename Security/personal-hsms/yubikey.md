@@ -133,7 +133,7 @@ pacman -S gpg yubikey-personalization pcsc-tools pcsclite libusb-compat \
 ##### Debian
 
 ```
-$ apt-get install yubikey-personalization yubikey-personalization-gui gpgv2 \
+$ sudo apt-get install yubikey-personalization yubikey-personalization-gui gpgv2 \
   pinentry-gtk2 swig pyside python-pip
 ```
 
@@ -142,8 +142,8 @@ $ apt-get install yubikey-personalization yubikey-personalization-gui gpgv2 \
 ```
 $ sudo add-apt-repository ppa:yubico/stable
 $ sudo apt-get update
-$ apt-get install yubikey-personalization yubikey-personalization-gui gpgv2 \
-  pinentry-gtk2 swig pyside python-pip yubioauth-desktop
+$ sudo apt-get install yubikey-personalization yubikey-personalization-gui gpgv2 \
+  pinentry-gtk2 swig python-pyside python-pip yubioath-desktop
 ```
 
 ### Set PIN
