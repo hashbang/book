@@ -28,7 +28,8 @@ large organizations such as the US Department of Defense, Facebook and Google.
 
 ## Verifying Authenticity
 
-How do I know the YubiKey in front of me is actually a YubiKey from Yubico, and not from EvilCo?
+How do I know the YubiKey in front of me is actually a YubiKey from Yubico, and
+not from EvilCo?
 
 People have been here before, and Yubico has helped them [support
 page](https://support.yubico.com/support/solutions/articles/15000009591-how-to-confirm-your-yubico-device-is-genuine)
@@ -37,8 +38,9 @@ They tell you to go to the verification page: [Verification Page](https://www.yu
 
 ## Visual Inspection
 
-Does it look like someone opened it up and put in a MITM microcontroller? If so, don't use it.
+Does it look like someone opened it up and put in a MITM microcontroller?
 
+If so, don't use it.
 
 ## OTP Verification
 
@@ -48,12 +50,15 @@ You can use the official [Yubico OTP Verification](https://demo.yubico.com/otp/v
 (although this does require you to insert an unverified HID into your computer).
 
 ### NFC Way
-For the YubiKeys with NFC, there's a slightly easier solution that works 'in the box' so to speak.
+For the YubiKeys with NFC, there's a slightly easier solution that works
+'in the box' so to speak.
 
-You can scan the NFC with your phone through the sealed package and it will generate an NDEF payload
-containing an unused AES OTP token at the end of a verification url.
+You can scan the NFC with your phone through the sealed package and it will
+generate an NDEF payload containing an unused AES OTP token at the end of a
+verification url.
 
-In other words, you scan one and it takes you to a yubico website saying it is legit, which is a decent verification.
+In other words, you scan one and it takes you to a yubico website saying it is
+legit, which is a decent verification.
 
 ## WebAuthN Verification
 
@@ -62,20 +67,22 @@ You can use the Yubico WebAuthN to verify your YubiKey
 Goto the WebAuthN [Yubico Demo Site](https://demo.yubico.com/webauthn-technical) and go through the flow of registering
 your device.
 
-You should see a "Registration Completed!" page and something like this image which shows that Yubico Verified your
-device. Don't be afraid to be curious and click on the "Show Technical Details" dropdown menu to learn more about what's
+You should see a "Registration Completed!" page and something like this image
+which shows that Yubico Verified your device. Don't be afraid to be curious and
+click on the "Show Technical Details" dropdown menu to learn more about what's
 happening 'under the covers'.
 ![image](https://user-images.githubusercontent.com/6826729/71484788-12753a80-27c3-11ea-884b-d8edee6bedf5.png)
 
 ## PIV Attestation
 
-Each YubiKey comes "pre-loaded from factory with a key and cert signed by Yubico"[source](https://developers.yubico.com/yubico-piv-tool/Attestation.html)
+Each YubiKey comes "pre-loaded from factory with a key and cert signed by
+Yubico"[source](https://developers.yubico.com/yubico-piv-tool/Attestation.html)
 
 You can use this to attest that the key was generated in a Yubico factory.
 
 For a detailed guide on the inner-workings of this attestation, review this [blog
-post](https://maxammann.org/posts/2019/09/verifying-yubikeys-for-genuity/) created from the magic of CCCAmp
-2019.
+post](https://maxammann.org/posts/2019/09/verifying-yubikeys-for-genuity/)
+created from the magic of CCCAmp 2019.
 
 
 ## Setup
