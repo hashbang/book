@@ -1,7 +1,8 @@
 # GnuK FST-01
 
-<img src="/assets/img/fst-01.jpg" width="320px" />
-[http://wiki.seeedstudio.com/wiki/FST-01]
+<img src="/img/fst-01.jpg" width="320px" />
+
+[Site](http://wiki.seeedstudio.com/wiki/FST-01)
 
 The GnuK FST-01 is an STM23 based personal HSM solution available for all
 typical GPG workflows such as SSH, code/binary/email signing, encryption, etc.

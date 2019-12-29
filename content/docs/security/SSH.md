@@ -1,3 +1,7 @@
+---
+title: Secure Shell
+---
+
 # SSH
 
 There are a number of different methods for using SSH with a yubikey. Most

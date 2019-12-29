@@ -1,3 +1,7 @@
+---
+title: IRC
+---
+
 ## Internet Relay Chat
 
 The chat protocol known as IRC was originally developed in 1988 as a way to

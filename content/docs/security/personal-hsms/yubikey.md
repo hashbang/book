@@ -1,6 +1,8 @@
 # YubiKey
 
-![Yubikey 5](/assets/img/yubikey.png)
+![Yubikey 5](/img/yubikey.png)
+
+[Site](https://yubico.com)
 
 A YubiKey is an inexpensive personal HSM produced by Yubico and widely used by
 large organizations such as the US Department of Defense, Facebook and Google.

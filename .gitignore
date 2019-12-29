@@ -1,3 +1,7 @@
+# Vim
+*.swo
+*.swp
+
 ### Hugo ###
 # Generated files by hugo
 /public/
