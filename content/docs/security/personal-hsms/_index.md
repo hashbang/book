@@ -20,12 +20,12 @@ damage and data theft from remote attackers.
 
 ## Devices
 
-- [Yubikey](yubikey)
-- [GnuK FST-01](gnuk_fst-01)
-- [Nitrokey / Librem Key](nitrokey)
-- [Ledger](ledger)
-- [Trezor](trezor)
-- [VivoKey](vivokey)
+- [Yubikey](yubikey/)
+- [GnuK FST-01](gnuk_fst-01/)
+- [Nitrokey / Librem Key](nitrokey/)
+- [Ledger](ledger/)
+- [Trezor](trezor/)
+- [VivoKey](vivokey/)
 
 
 ## Frequently Asked Questions
