@@ -11,7 +11,7 @@ RUN \
 COPY . /src/site/
 WORKDIR /src/site/
 RUN hugo --theme book -d /src/site/public -s .
-CMD ["/usr/local/bin/hugo", "server"]
+CMD ["/usr/local/bin/hugo", "server", "--bind", "0.0.0.0"]
 
 
 FROM debian:${DEBIAN_VERSION}@${DEBIAN_DIGEST} as server
