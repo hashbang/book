@@ -1,4 +1,9 @@
-## Personal HSMs
+---
+weight: 1
+title: Personal HSMs
+---
+
+# Personal HSMs
 
 Personal HSMs (Hardware Security Modules) are small hardware devices one uses
 to isolate secrets like private key material and prove physical access to a
@@ -15,12 +20,12 @@ damage and data theft from remote attackers.
 
 ## Devices
 
-- [Yubikey](yubikey.md)
-- [GnuK FST-01](gnuk_fst-01.md)
-- [Nitrokey / Librem Key](nitrokey.md)
-- [Ledger](ledger.md)
-- [Trezor](trezor.md)
-- [VivoKey](vivokey.md)
+- [Yubikey](yubikey)
+- [GnuK FST-01](gnuk_fst-01)
+- [Nitrokey / Librem Key](nitrokey)
+- [Ledger](ledger)
+- [Trezor](trezor)
+- [VivoKey](vivokey)
 
 
 ## Frequently Asked Questions

@@ -1,7 +1,8 @@
 # VivoKey
 
-<img src="/assets/img/vivokey.jpg" width="320px" />
-[http://vivokey.com/]
+<img src="/img/vivokey.jpg" width="320px" />
+
+[Site](http://vivokey.com/)
 
 The VivoKey is an NFC-only device designed to cover the bulk of use cases of
 the YubiKey while also having space for general user-supplied applications such

@@ -5,8 +5,9 @@ HSMs that boast full compatibility with all YubiKey 5 features with the
 exception of physical touch while additionally being fully open software and
 hardware.
 
-<img src="/assets/img/nitrokey-pro.jpg" width="320px" />
-[https://www.nitrokey.com/]
+<img src="/img/nitrokey-pro.jpg" width="320px" />
+
+[Site](https://www.nitrokey.com/)
 
 ##### Advantages
  * 100% of source code and hardware design is public and auditable

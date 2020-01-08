@@ -1,5 +1,9 @@
 # Ledger
 
+<img src="/img/ledger.png" width="320px" />
+
+[Site](https://www.ledger.com)
+
 Personal HSM designed for managing cryptocurrency that also has loadable app
 support allowing it to be used for most common use cases.
 

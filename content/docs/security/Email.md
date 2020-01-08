@@ -1,3 +1,9 @@
+---
+title: Email
+---
+
+# How to Secure Email
+
 Email is very easy to spoof. Anyone can trivially send email from anyone else in small quantities without tripping off anti-spam features in most email services.
 
 Tools like DMARC help with this by proving email came from a given domain, however even if all that is implemented properly in an orginization, any user can still pretend to be any user within that orginization. A compromised account from sales for instance could be used to send mail as a CEO or Head of IT.

@@ -1,3 +1,7 @@
+---
+title: GNU Privacy Guard
+---
+
 # GnuPG
 
 If you have encountered GPG before you probably know it as one of the worst
