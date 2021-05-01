@@ -23,22 +23,23 @@ also for reliability.
   * Should give out limited credentials to requesting services
     * Vault for instance can issue one-time-use mongodb credentials to services
       when they are starting up.
+  * Should provision ephemeral (with an expiry time) credentials when possible
 
 ##### A recurring job that compiles static assets
   * Should only need write access to one directory
     * Use filesystem namespacing, and only mount the specific path needed
-  * Should only need very minimal resources
+  * Should use minimal resources required to complete the job
     * Use cgroups to set worst-case upper bounds for cpu/threads/memory, etc.
   * Should -not- need to see other processes on the system
     * Use process namespacing
-  * Should only have access to minimal filesystem write system calls
+  * Should only have access to minimal filesystem write calls
 
 ##### An ssh bastion host
   * Does not need a package manager or many packages
     * Use packer or similar to build a bare minimum image.
   * Does not need write access to the disk
     * Boot with fsprotect or similar
-  * Does not need to offer shell accees
+  * Does not need to offer shell access
     * /bin/true is all that should be required for ssh passthrough
 
 #### Resources
@@ -56,7 +57,7 @@ also for reliability.
 ### Fault Tolerance
 
 It should be possible to destroy any single server at any time with minimal
-user facing disruption. The Netflix idea of "monkey testing" should be
+user facing disruption. The Netflix idea of "chaos monkey" testing should be
 something we strive to replicate.
 
 #### Examples
@@ -86,8 +87,8 @@ the key, is public knowledge."
 Assume our adversaries are patient and have all of our documentation,
 including this document.
 
-Design everything so that if sales chooses to use it as a point of pride to
-when talking to clients, this can't hurt us.
+Design everything so that if sales chooses to disclose details as a point of 
+pride or promotion, when talking to clients, this can't hurt us.
 
 Also when designing things, do it with the same level of care and abstraction
 you would if we were making it open source, even if we are not.
@@ -99,14 +100,14 @@ you would if we were making it open source, even if we are not.
 * They should learn our barrier is very high, and move on to easier targets.
 
 ##### Our adversary gains read/write access to our database
-* All private keys are encrypted with key only held by HSM
-* HSM should only decrypt private keys inside itself, without revealing them.
-* Tampering with a transaction will be rejected by HSM due to a bad signature
+* All private keys are encrypted with a key only stored in an HSM
+* HSM should only decrypt private keys inside itself, without revealing them
+* Tampering with a transaction will be rejected by the HSM due to a bad signature
 
 #### Resources
 
- * [Kerkhoffs's Pinciple - Wikipedia](https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle)
- * [A note about Kerkhoffs's Principle](https://blog.cloudflare.com/a-note-about-kerckhoffs-principle/)
+ * [Kerckhoffs's Pinciple - Wikipedia](https://en.wikipedia.org/wiki/Kerckhoffs%27s_principle)
+ * [A note about Kerckhoffs's Principle](https://blog.cloudflare.com/a-note-about-kerckhoffs-principle/)
 
 ### Distrust, then verify.
 
@@ -122,16 +123,16 @@ always favor that as time allows.
 
 We must always maintain ways to verify the integrity of systems at any time,
 especially those that grant untrusted third parties access to our systems, such
-as a janitor at a datacenter.
+as a janitor at a data center.
 
 #### Examples
 
 ##### We don't have time to run our own VCS in the short term
 * Third party systems that allow us to -prove- their integrity are preferred
-* Use Github, but sign all commits and verify externally before builds.
+* Use Github, but sign all commits and verify externally before builds
 
 ##### We recently patched a remote code execution vulnerability
-* Rebuild every system impacted. This easily proves there are no backdoors
+* Rebuild every system impacted - this easily proves there are no backdoors
 
 #### Resources
 
@@ -151,11 +152,11 @@ availability, rules, or pricing.
 #### Examples
 
 ##### We need Redis nodes but don't have the resources to self-host today
-* AWS Provides Elasticache which is turn-key vanilla redis
+* AWS provides ElastiCache which is turn-key vanilla Redis
 * We can easily port the data to our own servers at any time if forced
 
 ##### We need a system to manage credentials/rights for servers
-* IAM and KMS are powerful, but not portable.
+* IAM and KMS are powerful, but not portable
 * Favor rights management via pub/sub and open tools like Vault where possible
 
 ##### We need to reliably scale custom applications
@@ -181,11 +182,11 @@ greater than ours and are generally trusted.
 
 #### Acceptance
 
-* We must be able to cryptographically prove all changes and reviews made by
+* We must be able to cryptographically prove all changes and reviews made
 * All code must be public and open source
 * Must be active in OSS community and transparent about security practices.
 * Authors individually sign code and binaries
-* All code is reviewed by at least one engineer other than author.
+* All code is reviewed by at least one engineer other than author
 * Package management system automatically verifies signatures/hashes
 * Must do reproducible builds and avoid SPOF where possible
 
@@ -233,7 +234,7 @@ security practices.
 
 #### Exceptions
 
-* You can run/evaluate untrusted code but only in dedicated VMs/hardware.
+* You can run/evaluate untrusted code but only in dedicated VMs/hardware
 * Untrusted environments must never be able to interact with production systems
 
 ### Operating Systems
@@ -241,7 +242,7 @@ security practices.
 #### Criteria
 
 * Package manager must verify all packages for integrity/signatures by default
-* Signing must be distributed and be totally transparent.
+* Signing must be distributed and be totally transparent
 * Public reproducible build systems
 * Historically fast response to critical security issues
 * Mostly or totally open source and auditable
@@ -270,33 +271,34 @@ security practices.
 
 ### Secrets
 
-In this section "Secrets" are defined as private keys or that would allow
-manipulation of customer wallets/policies or that would allow viewing must
+In this section "Secrets" are defined as private keys or passwords that would allow
+manipulation of customer wallets/policies or that would allow viewing and must
 never be exposed to system memory of any device except an approved HSM.
 
 #### Required
 
 * FIDO hardware authentication must be exclusively used for supporting services
-  * DockerHub, Github, Amazon, etc
+  * DockerHub, Github, AWS, etc
 * All keys with the ability to -write- to a VCS -must- be on HSM devices
 
 #### Exceptions
 
 * Services that lack hardware U2F support may be used with Yubico Authenticator
+  * because it allows storage of totp secrets on a yubikey
 * Passwords which -must- be directly visible to an application in order for it
 to function, such as websites. These secrets may be maintained by a password
 manager that only decrypts the exact secret being requested with explicit
-approval by user with an HSM.
+approval by user(s) with an HSM.
 * Secrets can be made available to automatically managed applications on
 security hardened systems that humans lack direct access to, and only when use
 of an HSM is not practical.
 
 ### Coding Practices
 
-* Third party libraries must be reviewed and hash-lcoked in #! repos before use
-* A new version of a third party library requires explicit review/approval.
-* Automated CVE assesments on third party libraries must be present
-* Favor including functions instead of libraries where possible
+* Third party libraries must be reviewed and hash-locked
+* A new version of a third party library requires explicit review/approval
+* Automated CVE assessments on third party libraries must be present
+* Favor custom implementation instead of libraries where possible
 * Avoid packages that depend on low-quality dependencies like "is-even"
 * All project dependencies must be hash-locked with a package manager manifest
-* All code must be reviewed by an approved vendor.
+* All code must be reviewed by an approved vendor
