@@ -26,6 +26,7 @@ FIDO is a family of authentication protocols based on asymmetric cryptography, w
 * should use Yubico Authenticator when FIDO is not available
 
 ## Personal HSM Instructions
+* [Personal HSMS Guide](./personal-hsms/_index.md)
 
 ### Github 2FA Setup
 
