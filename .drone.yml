@@ -13,18 +13,14 @@ steps:
       recursive: true
       tags: true
   - name: build
-    image: plugins/docker
+    # https://github.com/drGrove/drone-kaniko/tree/v0.7.0
+    image: drgrove/drone-kaniko@sha256:e3045421c3683e6baf5628b22ea0ee1cd7ae217f4de0e1bc53a0a1a20335b108
     depends_on: [ clone ]
-    trigger:
-      event:
-        - pull_request
     settings:
-      repo: hashbang/book
-      username: hashbangbot
+      reproducible: true
+      username: hashbangdrone
       password:
         from_secret: dockerhub_ro_passphrase
-      purge: true
-      dry_run: true
 
 trigger:
   event:
@@ -50,11 +46,17 @@ steps:
       recursive: true
       tags: true
   - name: build
-    image: plugins/docker
+    # https://github.com/drGrove/drone-kaniko/tree/v0.7.0
+    image: drgrove/drone-kaniko@sha256:e3045421c3683e6baf5628b22ea0ee1cd7ae217f4de0e1bc53a0a1a20335b108
     depends_on: [ clone ]
     settings:
       repo: hashbang/book
+      reproducible: true
       username: hashbangbot
       password:
         from_secret: dockerhub_password
-      purge: true
+---
+kind: signature
+hmac: 720d2cca26760af37303f42d5d96f99fc70f56b905dad020b5c1e49a30dbc0ee
+
+...

@@ -1,10 +1,11 @@
-ARG GOLANG_VERSION=buster
-ARG GOLANG_DIGEST=sha256:544b2d0378d9de9a8ade9cebd9a333e60cc8343f9d3dd01ccccfc4c1395ce132
-ARG DEBIAN_VERSION=buster-slim
-ARG DEBIAN_DIGEST=sha256:0c679627b3a61b2e3ee902ec224b0505839bc2ad76d99530e5f0566e47ac8400
+# buster
+ARG GOLANG_DIGEST=sha256:8f7c5b9000f0531bb28860dc1232ca0defa346361e2003dbf324982407cfe927
 
-FROM golang:${GOLANG_VERSION}@${GOLANG_DIGEST} as builder
-ARG HUGO_VERSION=0.62.1
+# 1.21.0
+ARG NGINX_DIGEST=sha256:61191087790c31e43eb37caa10de1135b002f10c09fdda7fa8a5989db74033aa
+
+FROM golang@${GOLANG_DIGEST} as builder
+ARG HUGO_VERSION=0.83.1
 RUN \
   wget https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.deb \
   && dpkg -i hugo_extended_${HUGO_VERSION}_Linux-64bit.deb
@@ -14,8 +15,7 @@ RUN hugo --theme book -d /src/site/public -s .
 CMD ["/usr/local/bin/hugo", "server", "--bind", "0.0.0.0"]
 
 
-FROM debian:${DEBIAN_VERSION}@${DEBIAN_DIGEST} as server
-RUN apt-get update && apt-get install -y nginx
+FROM nginx@${NGINX_DIGEST} as server
 COPY --from=builder /src/site/public/ /usr/share/nginx/html/
 COPY nginx.conf /etc/nginx/nginx.conf
 RUN \
