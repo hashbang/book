@@ -1,9 +1,47 @@
+---
 kind: pipeline
 type: docker
-name: build
+name: build-pr
 
 clone:
   disable: true
+
+steps:
+  - name: clone
+    image: plugins/git
+    settings:
+      recursive: true
+      tags: true
+  - name: build
+    image: plugins/docker
+    depends_on: [ clone ]
+    trigger:
+      event:
+        - pull_request
+    settings:
+      repo: hashbang/book
+      username: hashbangbot
+      password:
+        from_secret: dockerhub_ro_passphrase
+      purge: true
+      dry_run: true
+
+trigger:
+  event:
+    - pull_request
+---
+kind: pipeline
+type: docker
+name: build-master
+
+clone:
+  disable: true
+
+trigger:
+  branch:
+    - master
+  event:
+    - push
 
 steps:
   - name: clone
