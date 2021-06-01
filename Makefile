@@ -1,4 +1,4 @@
-VERSION=latest
+VERSION := $(shell git describe --tags --always)
 
 .PHONY:
 submodule:
@@ -17,4 +17,7 @@ dev-server:
 
 .PHONY: image
 image:
-	docker build $(BUILD_ARGS) -t hashbang/book:$(VERSION) .
+	docker build \
+		$(BUILD_ARGS) \
+		-t hashbang/book:$(VERSION) \
+		.
