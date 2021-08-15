@@ -101,6 +101,11 @@ if [ -z "$SSH_TTY" ]; then
        );
     then
         killall gpg-agent
+	# This isn't strictly required but helps prevents issues when trying to
+	# mount a socket in the /run tmpfs into a Docker container, and puts
+	# the socket in a consistent location under GNUPGHOME
+        rm -r /run/user/`id -u`/gnupg
+        touch /run/user/`id -u`/gnupg
         gpg-agent --daemon --enable-ssh-support > $envfile
     fi
 
