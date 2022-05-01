@@ -1,17 +1,3 @@
-# Privacy
-
-## Intro
-
-This document seeks to outline best practices for privacy and where possible,
-anonymity, in our day to day life in our present world where surveillance
-capitalisim and app culture are the default.
-
-## Communication
-
-## Transportation
-
-## Discoverability
-
 ## Commerce
 
 Imagine you need to pick up something sensitive from a pharmacy. Maybe
@@ -69,7 +55,7 @@ Almost no one uses cash anymore, and there are good reasons for that, but there
 are also really important and less obvious reasons we should push through the
 drawbacks and use cash everywhere we can.
 
-### Why cash sucks
+#### Why cash sucks
 
 * Checking out often takes longer
   * It confuses younger generations at checkout counters.
@@ -79,7 +65,7 @@ drawbacks and use cash everywhere we can.
 * Carrying around change is a pain
   * If it bothers you, drop it in the tip jar.
 
-### Why you should use it anyway.
+#### Why you should use it anyway.
 
 * It requires doing math all the time
   * You will get fast at doing math in your head and it will improve your life.
@@ -95,8 +81,90 @@ drawbacks and use cash everywhere we can.
 * You can get priority service at bars.
   * Give them a $5 on the first drink and they will take care of you all night
 
-### When cash isn't accepted?
+#### When cash isn't accepted?
 
 Some parking systems and self-checkouts only take cards. Avoid these when you
 can, but sometimes you can't. In these cases having visa gift cards around
 you bought anonymously with cash will do the job almost anywhere.
+
+
+### Bitcoin
+
+Many readers cringe the moment they saw this as a title, and there are some
+real drawbacks of Bitcoin, but there are also many cases where it is the most
+private, practical, and green way to make a purchase while protecting your
+privacy.
+
+If you are reading this, you are probably not sold on using Bitcoin as an
+actual currency yet, but we hope to make a fair case, and in turn we ask that
+you set aside a lot of the misinformed propaganda you hear on the topic and
+digest some irrefutable facts and informed opinons we have to share.
+
+Other readers here are screaming "What about Monero, ZCash, and X random coin".
+
+Well, yes, those exist, but Bitcoin is currently the only cryptoasset with any
+useful level of adoption in commerce. If you are aware of a niche vendor that
+accepts Monero, then you don't need us to tell you that is a neat option.
+
+#### Why people think Bitcoin sucks
+
+* It uses a lot of energy
+  * 70% of bitcoin use is green energy
+  * Increasingly common Layer 2 solutions like Lightning use negligable energy.
+* Only the rich can afford a Bitcoin
+  * You don't need to buy a whole Bitcoin. You can buy $5 worth if you like.
+* It is volatile
+  * So are stocks, as anyone owning TSLA or TWTR can attest.
+  * Bitcoin has wildly outpreformed the dollar for over a decade.
+  * It will never inflate by design, unlike the 8%+ annual loss in USD
+    * Inflation is a major source of economic pain and inequality.
+      * See: https://wtfhappenedin1971.com/
+* It is used for terrorism, fraud, and money laundering
+  * Fiat currency is used even more often for the same things.
+  * Highways are used for human trafficking.
+  * The internet is used to spread child porn.
+  * Cooking knives are used to murder people.
+* You are screwed if it gets lost or stolen.
+  * If you can avoid losing country identity documents, you can store btc.
+    * You can store your bitcoin wallet:
+      * In your brain
+      * On paper as 24 words
+      * In an NFC ring, or implant
+      * On many sheets of paper spread across many locations
+    * You can share access with people you trust
+      * Multi-sig wallets allow multiple people to share wallet access
+      * You can permit spending only if only one or multiple parties agree.
+* It has no privacy because all exchanges do KYC/AML.
+  * You can trade Bitcoin for Monero then for Bitcoin again for high privacy.
+  * You can buy from an ATM or a peer-to-peer source instead
+  * You can have employers, clients, and friends settle debts with you in BTC.
+
+#### Why Bitcoin actually sucks
+
+* Most popular storage options have terrible security.
+* Most secure storage options have a steep learning curve
+* Bitcoin ATMs are only common in major metropolitan areas
+* Not many businesses accept it yet
+* Any government could shut it down if they really wanted to.
+* It is written in a language that make security mistakes easy
+* There is very little implementation diversity
+* Most nodes are deployed with terrible security practices
+* Most nodes are slow to apply upgrades and patches
+
+#### Why you should use it anyway
+
+* Many online vendors allow only Paypal or Bitcoin.
+  * Bitcoin is normally lower fees and preserves privacy
+* Anonymously purchased BTC can preserve your privacy when spending.
+* You can hide it much more easily than cash
+  * A real problem in developing countries or for homeless individuals.
+* Buying incrementally with dollar cost averaging beats savings accounts.
+  * Modern savings accounts make negative interest when considering inflation
+  * Bitcoin is deflationary by design and not vulnerable to this problem
+* A false court accusation can't get your wallet frozen or drained
+* Governments can't easily seize a wallet stored in your brain.
+* No one can easily prove you even have a self custodial Bitcoin wallet.
+* Properly stored Bitcoin can't be stolen by identity theft
+  * Proper storage:
+    * Checking: Mobile phone app with amount you can afford to lose
+    * Savings: Multisig "cold wallet" using hardware wallet devices
