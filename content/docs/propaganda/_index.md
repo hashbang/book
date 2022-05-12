@@ -9,6 +9,11 @@
 -   The Matrix
 -   Sneakers
 
+## Music
+
+- Pennywise - Disconnect
+- MXPX - Shut It Down
+
 ## Games
 
 -   Deus Ex
@@ -64,7 +69,6 @@
 
 -   privacytools.io
 -   [Hack the Box](https://www.hackthebox.eu/)
--   
 
 ## Communities
 
