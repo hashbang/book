@@ -21,4 +21,4 @@ At the moment using the Secure Token backed SSH + reverse SSH tunnels may be you
 
 The main caveat of this is it will require a system already physically on the network you wish to to access to keep an outbound tunnel established you can connect through.
 
-You could also eliminate the NAT by having an IPv6 IP address assigned to you via Hurricane Electric or similar. You could then ssh to an in-house system psudo-directly from the IPv6 internet.
+You could also eliminate the NAT by having an IPv6 IP address assigned to you via Hurricane Electric or similar. You could then ssh to an in-house system pseudo-directly from the IPv6 internet.
