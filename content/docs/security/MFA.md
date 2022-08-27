@@ -25,7 +25,7 @@ message downgrade attack may result in the message being replayed over 2G.
 
 Time-based One Time Passwords (TOTP), are one of the more common authentication
 methods which are relatively good compared to SMS, but still have some
-weaknesses. TOTP is based on asymmetric cryptography, which means the secret
+weaknesses. TOTP is based on symmetric cryptography, which means the secret
 used to generate codes is stored by both the client and the authentication
 server, and can be leaked by being intercepted during the setup process or by
 being improperly stored on the user's device.
