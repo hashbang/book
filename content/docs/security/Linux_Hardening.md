@@ -282,7 +282,7 @@ This is all managed via /etc/fstab
   * https://linux.die.net/man/8/execstack
 
 ###### Source Fortification
-* Usage: ```-DFORTIFY_SOURCE=2```
+* Usage: ```-D_FORTIFY_SOURCE=2 -O2``` or ```-D_FORTIFY_SOURCE=3 -O2``` (the latter adds runtime overhead)
 * Intention:
   * Many programs rely on functions that are not aware of buffer-length
   * Buffer overflow exploits often take advantage of these functions
@@ -293,6 +293,7 @@ This is all managed via /etc/fstab
 * Resources:
   * https://github.com/intel/safestringlib/wiki/FORTIFY-SOURCE-and-Safe-String-Library
   * https://idea.popcount.org/2013-08-15-fortify_source/
+  * https://developers.redhat.com/articles/2022/09/17/gccs-new-fortification-level
 
 ###### Run-time bounds checking for C++ strings/containers
 * Usage: ```-Wp, -D_GLIBCXX_ASSERTIONS```
