@@ -87,31 +87,57 @@ Some parking systems and self-checkouts only take cards. Avoid these when you
 can, but sometimes you can't. In these cases having visa gift cards around
 you bought anonymously with cash will do the job almost anywhere.
 
-
 ### Bitcoin
 
 Many readers cringe the moment they saw this as a title, and there are some
-real drawbacks of Bitcoin, but there are also many cases where it is the most
-private, practical, and green way to make a purchase while protecting your
+real drawbacks of Bitcoin, but there are also a number of cases where it is the
+most private, practical, and green way to make a purchase while protecting your
 privacy.
 
 If you are reading this, you are probably not sold on using Bitcoin as an
-actual currency yet, but we hope to make a fair case, and in turn we ask that
-you set aside a lot of the misinformed propaganda you hear on the topic and
-digest some irrefutable facts and informed opinons we have to share.
+actual currency yet, but we hope to make a fair case for the pros and cons.
 
 Other readers here are screaming "What about Monero, ZCash, and X random coin".
 
-Well, yes, those exist, but Bitcoin is currently the only cryptoasset with any
-useful level of adoption in commerce. If you are aware of a niche vendor that
-accepts Monero, then you don't need us to tell you that is a neat option.
+Well, yes, those exist and have many noteworthy advantages but Bitcoin is
+currently the only cryptoasset with any useful level of adoption in commerce.
+If you are aware of a niche vendor that accepts Monero, then you don't need us
+to tell you that is a great privacy option.
 
 #### Why people think Bitcoin sucks
 
-* It uses a lot of energy
-  * 70% of bitcoin use is green energy
-  * Increasingly common Layer 2 solutions like Lightning use negligable energy.
-* Only the rich can afford a Bitcoin
+##### "It uses a lot of energy"
+
+  * Lightning network already enables near zero energy transactions
+    * These transactions are peer to peer and invisible to the Bitcoin network
+  * Mining will still use energy, though the network rewards cheapest KW/h.
+    * All miners compete for profitability at small margins over energy cost
+    * It will soon be impractical to generate mining profits on fossil fuels
+    * On track for Bitcoin mining using 70% renewables by 2030
+  * It uses dramatically less than mining Gold today
+    * Gold mining by design cannot use renewables
+
+##### "It is a pyramid scheme"
+  * First, let's define a pyramid scheme:
+    * Subordinate investors pay earnings to a higher level investor
+    * The scheme ends when higher levels "cash out" and abandon subordinates
+  * Now, let's define investment
+    * You believe something will succeed before the general public and buy it
+    * You end up being right, and the public does in fact increase demand
+    * You can choose to sell for more than your original purchase price
+  * Bitcoin functions as both a currency, and a speculative investment
+  * No central party controls the supply of Bitcoin
+  * It is true that early buyers that took more risk, did make a lot of profit
+  * If Bitcoin is a pyramid scheme, then so are stocks and gold.
+
+##### "It has no intrinsic value"
+
+  * Also known as: "Gold is useful, unlike bitcoin"
+    * Bitcoin and Gold both have niche uses, but majority use is value storage
+    * 92% of gold use is for value storage and jewelry
+
+##### "Only the rich can afford a Bitcoin"
+
   * You don't need to buy a whole Bitcoin. You can buy $5 worth if you like.
 * It is volatile
   * So are stocks, as anyone owning TSLA or TWTR can attest.
@@ -119,33 +145,43 @@ accepts Monero, then you don't need us to tell you that is a neat option.
   * It will never inflate by design, unlike the 8%+ annual loss in USD
     * Inflation is a major source of economic pain and inequality.
       * See: https://wtfhappenedin1971.com/
-* It is used for terrorism, fraud, and money laundering
+
+##### "It is used for terrorism, fraud, and money laundering"
+
   * Fiat currency is used even more often for the same things.
   * Highways are used for human trafficking.
   * The internet is used to spread child porn.
   * Cooking knives are used to murder people.
-* You are screwed if it gets lost or stolen.
-  * If you can avoid losing country identity documents, you can store btc.
+  * A tool can be used for both constructive and destructive purposes.
+
+#### "You are screwed if it gets lost or stolen"
+
+  * If you can avoid losing country identity documents, you can store BTC.
     * You can store your bitcoin wallet:
       * In your brain
       * On paper as 24 words
       * In an NFC ring, or implant
-      * On many sheets of paper spread across many locations
+      * Duplicated across sheets of paper spread across many locations
+      * "sharded" requiring paper from multiple locations to be combined
     * You can share access with people you trust
       * Multi-sig wallets allow multiple people to share wallet access
       * You can permit spending only if only one or multiple parties agree.
-* It has no privacy because all exchanges do KYC/AML.
+      * Agreement of a majority of friends could be
+
+#### "It has no privacy because all exchanges do KYC/AML."
+
   * You can trade Bitcoin for Monero then for Bitcoin again for high privacy.
   * You can buy from an ATM or a peer-to-peer source instead
   * You can have employers, clients, and friends settle debts with you in BTC.
 
-#### Why Bitcoin actually sucks
+#### Why Bitcoin /actually/ sucks
 
-* Most popular storage options have terrible security.
+* Most popular storage options have terrible security
+* Only the very well informed can avoid falling prey to thieves and scammers
 * Most secure storage options have a steep learning curve
 * Bitcoin ATMs are only common in major metropolitan areas
 * Not many businesses accept it yet
-* Any government could shut it down if they really wanted to.
+* Any government could shut it down if they really wanted to
 * It is written in a language that make security mistakes easy
 * There is very little implementation diversity
 * Most nodes are deployed with terrible security practices
@@ -154,15 +190,18 @@ accepts Monero, then you don't need us to tell you that is a neat option.
 #### Why you should use it anyway
 
 * Many online vendors allow only Paypal or Bitcoin.
-  * Bitcoin is normally lower fees and preserves privacy
+  * Bitcoin is normally lower fees and substantially more private
+  * Option for much stronger privacy when traded for Monero and back to Bitcoin
 * Anonymously purchased BTC can preserve your privacy when spending.
 * You can hide it much more easily than cash
   * A real problem in developing countries or for homeless individuals.
 * Buying incrementally with dollar cost averaging beats savings accounts.
+  * Any deflationary asset in demand is better to hold than USD
+  * Bitcoin can be directly spent or converted to USD when required quickly
   * Modern savings accounts make negative interest when considering inflation
   * Bitcoin is deflationary by design and not vulnerable to this problem
-* A false court accusation can't get your wallet frozen or drained
 * Governments can't easily seize a wallet stored in your brain.
+  * A false court accusation can't get your wallet frozen or drained
 * No one can easily prove you even have a self custodial Bitcoin wallet.
 * Properly stored Bitcoin can't be stolen by identity theft
   * Proper storage:
